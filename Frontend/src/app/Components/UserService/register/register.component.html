@@ -1,0 +1,19 @@
+<body>
+<div class="registerbox">
+  <h2>Register</h2>
+  <div class="error" *ngIf="error">{{message}}</div>
+
+  <form [formGroup]="registerForm" (ngSubmit)="Register()">
+
+    <input type="text" formControlName="firstname" placeholder="First name">
+    <input type="text" formControlName="lastname" placeholder="last name">
+    <input type="tel" formControlName="contactno" placeholder="Phone No" >
+    <input (blur)=checkEmail($event) type="email" formControlName="username" placeholder="Enter Email">
+    <input type="password" formControlName="password" name="" placeholder="Enter Password">
+    <input type="submit" name="Login">
+
+
+    <a href="/Login">If you already have an account</a>
+  </form>
+</div>
+</body>
