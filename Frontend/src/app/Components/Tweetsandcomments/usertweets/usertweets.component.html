@@ -1,0 +1,156 @@
+<div class="body"
+     [ngStyle]="{'-webkit-filter': !commentpopup? 'blur(0)' : 'blur(6px)'}">
+
+
+  <div class="leftbox">
+    <div class ="leftboxdata">
+      <div class="home">
+        <a href="/">#Home</a>
+      </div>
+      <div class="trending">
+        <a href="/">#Trending</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="middlebox">
+
+    <div class="posttweet">
+      <div class="backgroundcard">
+      </div>
+
+      <div class="userimage">
+        <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" >
+      </div>
+
+      <div class="details">
+        {{firstname}} {{lastname}}
+        <small>{{userid}}</small>
+        <hr>
+        <p>
+          posts: {{postcount}}
+        </p>
+      </div>
+
+    </div>
+
+    <div *ngFor="let post of tweets" class="tweetbox">
+      <div class="postheader" >
+        <div class="userlogoimage">
+          <img height=40 src="./assets/UserLogo.jpg" style="border-radius: 50%" width="35">
+        </div>
+
+        <div class="name">
+          <a href="u"> {{userdetail.firstname}} {{userdetail.lastname}}</a>
+        </div>
+
+        <div class="verfied">
+          <img height=15 src="./assets/verifiedlogo.jpeg" style="border-radius: 50%" width="18">
+        </div>
+
+        <div class="time">
+          {{post.date  }}
+        </div>
+      </div>
+
+
+      <div (click)="postdetails(post.postid)" class="postbody">
+        <div class="postdescription">
+          {{post?.postDescription}}
+        </div>
+        <div class="url">
+          {{post?.url}}
+        </div>
+        <div class="tags">
+          {{post?.tags}}
+        </div>
+      </div>
+
+      <div class="postfooter">
+
+        <div class="comment">
+          <button (click)="popup(post)">
+            <fa-icon [icon]="faComment"></fa-icon>
+            {{post.commentcount}}
+          </button>
+        </div>
+
+        <div class="retweet">
+          <fa-icon [icon]="faRetweet"></fa-icon>
+        </div>
+        <div class="like">
+          <fa-icon [icon]="faHeart"></fa-icon>
+        </div>
+
+        <div class="share">
+          <a href="">
+            <fa-icon [icon]="faShare"></fa-icon>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="boxright">
+    <div class="search-container">
+      <form>
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><fa-icon [icon]="faSearch"></fa-icon> </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+<body>
+<div *ngIf="commentpopup" class="loginbox">
+  <div class="error"> </div>
+  <div class="closelogo" (click)="popup(popupdata)">
+    <fa-icon [icon]="ffaTimes"></fa-icon>
+  </div>
+
+
+  <div class="tweetbox">
+    <div class="postheader">
+      <div class="image">
+        <img height=40 src="./assets/UserLogo.jpg" style="border-radius: 50%" width="35">
+      </div>
+
+      <div class="name">
+        <a href="u"> {{popupdata.user}} </a>
+      </div>
+
+      <div class="verfied">
+        <img height=15 src="./assets/verifiedlogo.jpeg" style="border-radius: 50%" width="18">
+      </div>
+
+      <div class="time">
+        {{popupdata.date }}
+      </div>
+    </div>
+
+    <br>
+    Reply to:
+
+    <div  class="postbody">
+      <div class="postdescription">
+        {{popupdata?.postDescription}}
+      </div>
+      <div class="url">
+        {{popupdata?.url}}
+      </div>
+      <div class="tags">
+        {{popupdata?.tags}}
+      </div>
+    </div>
+  </div>
+
+  <form (ngSubmit)="postcomment(popupdata)" [formGroup]='commentform'>
+    <textarea formControlName="comment_text" placeholder="enter tweet" required="required"></textarea>
+    <input name="post" type="submit" value="Tweet">
+  </form>
+</div>
+</body>
