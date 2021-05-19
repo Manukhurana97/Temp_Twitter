@@ -20,17 +20,18 @@ import { TweetinfoComponent } from './Components/Tweetsandcomments/tweetinfo/twe
 
 
 const route: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'Login', component: LoginComponent, },
-  {path: 'Register', component: RegisterComponent, },
+  {path: '', component: HomeComponent, resolve: {}},
+  {path: 'Login', component: LoginComponent, canActivate: [PathGaurdGuard]},
+  {path: 'Register', component: RegisterComponent, canActivate: [PathGaurdGuard]},
   {path: 'ChangePassword', component: ChangePasswordComponent, },
-  {path: 'ForgotPassword', component: ForgetPasswordComponent},
-  {path: 'ForgotPasswordConform/:token', component: ForgetPasswordConfirmComponent},
-  {path: 'a', component: UserDetailsComponent, },
-  {path: 'u', component: UsertweetsComponent, },
-  {path: 'i/:postid', component: TweetinfoComponent },
+  {path: 'ForgotPassword', component: ForgetPasswordComponent, canActivate: [PathGaurdGuard]},
+  {path: 'ForgotPasswordConform/:token', component: ForgetPasswordConfirmComponent, canActivate: [PathGaurdGuard]},
+  {path: 'a', component: UserDetailsComponent, canActivate: [SignOnPathGuardGuard]},
+  {path: 'u', component: UsertweetsComponent },
+  {path: 'i/:postid', component: TweetinfoComponent, canActivate: [SignOnPathGuardGuard]},
 
 ];
+
 
 @NgModule({
   declarations: [],
