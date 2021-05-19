@@ -14,7 +14,6 @@ import { UserDetailsComponent } from './Components/UserService/user-details/user
 import { HomeComponent } from './Components/Tweetsandcomments/home/home.component';
 import {RouterModule, Routes} from '@angular/router';
 import {SignOnPathGuardGuard} from './Guard/sign-on-path-guard.guard';
-import {ForgotPasswordTokenGuard} from './Guard/forgot-password-token.guard';
 import { UsertweetsComponent } from './Components/Tweetsandcomments/usertweets/usertweets.component';
 import { TweetinfoComponent } from './Components/Tweetsandcomments/tweetinfo/tweetinfo.component';
 
