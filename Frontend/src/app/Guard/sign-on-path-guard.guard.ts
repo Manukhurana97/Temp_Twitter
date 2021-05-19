@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, UrlTree} from '@angular/router';
+import {CanActivate, Router, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {UserserviceService} from '../Service/userservice.service';
 
@@ -10,18 +10,28 @@ export class SignOnPathGuardGuard implements CanActivate {
 
   public check: boolean;
 
-  constructor(private userservice: UserserviceService) {
+  constructor(private userservice: UserserviceService, private route: Router) {
   }
 
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.userservice.CheckToken().subscribe(
-      data => {
-        this.check = true;
-      },
-      error1 => {
-        this.check = false;
-      }
-    );
-    return this.check;
+    return new Observable<boolean>(obs => {
+      this.userservice.CheckToken().subscribe(
+        data => {
+          if (data.status === 200 && data.username !== '') {
+            obs.next(true);
+            console.log(obs);
+          }
+          else {
+            this.route.navigate(['/Login']);
+            obs.next(false);
+            console.log(obs);
+          }
+        },
+        error => {
+          obs.next(false);
+          console.log(obs);
+        }
+      );
+    });
   }
 }
