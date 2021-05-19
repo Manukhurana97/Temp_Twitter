@@ -145,7 +145,7 @@ public class PasswordController {
 
                     //	    		 send email
                     String body = "This mail is in response to a request to recover a forgotten password" +
-                            "\nhttp://localhost:4200/ForgotPasswordConform/" + token +
+                            "\nhttp://localhost:4200/ForgotPasswordConform/" + encryptpasswordtoken +
                             "\n This link is valid for 30 minutes" +
                             "\n Please do not reply on this mail";
 
