@@ -1,0 +1,20 @@
+<body>
+  <div class="loginbox">
+    <div class="error" *ngIf="error">{{message}}</div>
+    <h2>Login</h2>
+    <form  [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+
+      <p>Email</p>
+      <input type="email" name="username" formControlName="username" placeholder="Enter Email"  >
+
+      <p>Password</p>
+      <input type="password" formControlName="password" placeholder="Enter Password">
+
+      <input type="submit" name="Login">
+
+      <a href="/ForgotPassword">Forgot password</a><br>
+      <a href="/Register">Don't have an account</a>
+    </form>
+  </div>
+</body>
+
